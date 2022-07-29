@@ -146,19 +146,6 @@ h2 {
     text-align: center;
 }
 
-#progressBar {
-    width: 20rem;
-    height:3rem;
-    border: 0.2rem solid white;
-    border-radius: 50px;
-    overflow: hidden;
-}
-
-#progressBarFull {
-    height: 100%;
-    background: white;
-    width:50%;
-}
 
 @media screen and (max-width: 768px) {
     .container .choice-container{
