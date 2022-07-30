@@ -7,9 +7,13 @@ var choiceArr = [choiceA, choiceB, choiceC, choiceD]
 var scoreText = document.querySelector("#score");
 var homeContainer  = document.querySelector("#home");
 var gameContainer = document.querySelector("#game");
+var endContainer = document.querySelector("#end");
+var highscoreContainer = document.querySelector("#highScores");
 var timerEl = document.querySelector("#timerEl");
 var progressText = document.querySelector("#progressText");
-var userAnswer = document.querySelector(".choice-text")
+var userAnswer = document.querySelector(".choice-text");
+var highscoresList = document.querySelector("#highscoresList");
+var highScores = json.parse(localStorage.getItem("highScores")) || [];
 
 
 var questionIndex = 0
@@ -42,12 +46,12 @@ var questions = [
 ]
 
 // function to display question and choices on game and change to next question when an answer is chosen
-function initialize() {
+function showQuestion() {
     question.textContent = questions[questionIndex].question;
     for (var i = 0; i < choiceArr.length; i++) {
         choiceArr[i].textContent = questions[questionIndex].choices[i];
         choiceArr[i].onclick = function() { 
-            console.log(questions[questionIndex].choices[i] === questions.answer);
+            // console.log(questions[questionIndex].choices[i] === questions.answer);
             // if (questions[questionIndex].choices[i] == questions.answer) {
             //     choiceArr[i].dataset.isAnswer = true
             // } else {
@@ -56,21 +60,25 @@ function initialize() {
             console.log(this.textContent);
             // console.log(choiceArr[i].dataset.isAnswer);
             questionIndex ++;
-            initialize();
+            if (questionIndex >= questions.length) {
+                endGame();
+            } else {
+            showQuestion();
             progressText.textContent = (questionIndex + 1) + " of " + questions.length;
+            }
         };
     }
 }
 
 //comparison function for correct or incorrect answer
-function comparison() {
-    console.log(userAnswer.getAttribute("data-answer"));
-    if (userAnswer.getAttribute("data-answer") === questions.answer){
-        userAnswer.classList.add("correct");
-    }else {
-        userAnswer.classList.add("incorrect");
-    }
-    };
+// function comparison() {
+//     console.log(userAnswer.getAttribute("data-answer"));
+//     if (userAnswer.getAttribute("data-answer") === questions.answer){
+//         userAnswer.classList.add("correct");
+//     }else {
+//         userAnswer.classList.add("incorrect");
+//     }
+//     };
 
 
 // Function to set timer at 60 seconds and count down each second
@@ -80,22 +88,28 @@ function setTime() {
     var timerInterval = setInterval(function() {
       secondsLeft--;
       timerEl.textContent = "0:" + secondsLeft;
-      if(secondsLeft === 0) {
+      if (secondsLeft === 0) {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
-        // Calls function to create and append image
+        endGame();
         ;
-      }if(secondsLeft < 10) {
+      } if (secondsLeft < 10) {
         timerEl.textContent = "0:0" + secondsLeft;
       }
     }, 1000);
   }
 
-// click event to hide home screen and display quiz
-document.querySelector(".btn").onclick = function () {
-    homeContainer.classList.add("hidden");
-    gameContainer.classList.remove("hidden");
-    initialize();
-    setTime();
-    progressText.textContent = (questionIndex + 1) + " of " + questions.length;
+
+function endGame(){
+    gameContainer.classList.add("hidden");
+    endContainer.classList.remove("hidden");
 }
+
+// click event to hide home screen and display quiz
+// document.querySelector(".btn").onclick = function () {
+//     homeContainer.classList.add("hidden");
+//     gameContainer.classList.remove("hidden");
+//     showQuestion();
+//     setTime();
+//     progressText.textContent = (questionIndex + 1) + " of " + questions.length;
+// }

@@ -10,7 +10,7 @@
     <!-- Main Container -->
     <div class="container">
       <!-- Section for the Starting Screen -->
-      <section id="home" class="flex-column flex-center">
+      <section id="home" class="flex-column flex-center hidden">
         <h1>Ready To Play CODE QUIZ?</h1>
         <button class="btn">Play &#9654</button>
         <button id="highscore-btn" class="btn">High Scores &#127942</button>
@@ -60,6 +60,21 @@
             <p class="choice-letter">D</p>
             <p id = "d" class="choice-text" data-number="4">Choice</p>
           </article>
+      </section>
+      <section id="end" class="flex-center flex-column hidden">
+          <h1 id="finalScore">0</h1>
+          <form class="end-form-container">
+            <h2 id="end-text">Enter your initials below to save your score!</h2>
+            <input type="text" name="name" id="username" placeholder="Enter your initials">
+            <button class="btn" id="saveScoreBtn" type="submit" onclick="saveHighScore(event)">Save 💾<button>
+            <button class="btn">Play Again &#9654</button>
+            <button class="btn">View Highscores &#127942</button>
+          </form>
+      </section>
+      <section id="highScores" class="flex-center flex-column">
+        <h1 id="finalScore">Leaderboard</h1>
+        <ul id="highscoresList"></ul>
+        <button class="btn">Go Home &#127968</button>
       </section>
     </div>
  <script src="./Assets/js/script.js">
