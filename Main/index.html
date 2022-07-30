@@ -10,18 +10,28 @@
     <!-- Main Container -->
     <div class="container">
       <!-- Section for the Starting Screen -->
-      <section id="home" class="flex-column flex-center hidden">
+      <section id="home" class="flex-column flex-center">
         <h1>Ready To Play CODE QUIZ?</h1>
-        <a href="/game.html" class="btn">Play &#9654</a>
-        <a href="/highscores.html" id="highscore-btn" class="btn">High Scores &#127942</a>
+        <button class="btn">Play &#9654</button>
+        <button id="highscore-btn" class="btn">High Scores &#127942</button>
       </section>
       <!-- Section for the Quiz Itself -->
-      <section id="game" class="justify-center flex-center ">
+      <section id="game" class="justify-center flex-center hidden">
         <header id="hud">
           <div class="hud-item">
-            <p id="progressText" class="hud-prefix">
+            <p class="hud-prefix">
               Question
             </p>
+            <h1 id="progressText">
+            </h1>
+          </div>
+          <div class="hud-item">
+            <p id="timer" class="hud-prefix">
+              Timer
+            </p>
+            <h1 id="timerEl" class="hud-main-text">
+              0:00
+            </h1>
           </div>
           <div class="hud-item">
             <p class="hud-prefix">
@@ -36,21 +46,22 @@
         <h2 id="question">What is the answer to this question?</h2>
           <article class="choice-container">
             <p class="choice-letter">A</p>
-            <p class="choice-text" data-number="1">Choice</p>
+            <p id = "a" class="choice-text" data-number="1">Choice</p>
           </article>
           <article class="choice-container">
             <p class="choice-letter">B</p>
-            <p class="choice-text" data-number="2">Choice</p>
+            <p id = "b" class="choice-text" data-number="2">Choice</p>
           </article>
           <article class="choice-container">
             <p class="choice-letter">C</p>
-            <p class="choice-text" data-number="3">Choice</p>
+            <p id = "c" class="choice-text" data-number="3">Choice</p>
           </article>
           <article class="choice-container">
             <p class="choice-letter">D</p>
-            <p class="choice-text" data-number="4">Choice</p>
+            <p id = "d" class="choice-text" data-number="4">Choice</p>
           </article>
       </section>
     </div>
-
+ <script src="./Assets/js/script.js">
+ </script>
   </body>

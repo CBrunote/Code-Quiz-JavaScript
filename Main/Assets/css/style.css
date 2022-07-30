@@ -71,6 +71,7 @@ h2 {
     color: rgb(28, 26, 26);
     background: linear-gradient(90deg, rgb(141, 18, 255) 0%, rgb(132, 0, 255) 100%);
     border-radius: 4px;
+    border-style: none;
 }
 
 .btn:hover {
