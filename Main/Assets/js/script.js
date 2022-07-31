@@ -16,7 +16,11 @@ var highscoresList = document.querySelector("#highscoresList");
 var secondsLeft = 60;
 var finalScore = document.querySelector("#finalScore");
 var timer;
-var highScores = [JSON.parse(localStorage.getItem("userScores"))] || [];
+var highScores = [JSON.parse(localStorage.getItem("userScores"))]  || [];
+// .sort((function (a, b) {
+//     return b.score - a.score;}))
+// var sortedScores = highScores.sort((function (a, b) {
+//     return b.score - a.score;}));
 
 
 var questionIndex = 0
@@ -54,21 +58,17 @@ function showQuestion() {
     for (var i = 0; i < choiceArr.length; i++) {
         choiceArr[i].textContent = questions[questionIndex].choices[i];
         choiceArr[i].onclick = function() {
-            // console.log(userAnswer.textContent);
-            // console.log(questions[questionIndex].answer === this.textContent)
             if (questions[questionIndex].answer !== this.textContent){
                 (secondsLeft = secondsLeft - 15); 
             }
-            //     this.classList.add("correct")
-            // } else {
-            //     this.classList.add("incorrect");
-                
-            // }
+
             questionIndex ++;
        
             if (questionIndex >= questions.length) {
                 endGame();
-            } else {  
+            } else if (secondsLeft <= 0) {
+                endGame();
+            } else {
             showQuestion();
             progressText.textContent = (questionIndex + 1) + " of " + questions.length;
             }
@@ -95,6 +95,9 @@ function setTime() {
 // Function to end the game
 function endGame(){
     clearInterval(timer);
+    if (secondsLeft < 0) {
+        secondsLeft = 0
+    }
     localStorage.setItem('score', JSON.stringify(secondsLeft));
     gameContainer.classList.add("hidden");
     endContainer.classList.remove("hidden");
@@ -126,14 +129,34 @@ document.querySelector("#view-highscores").onclick = function (event) {
 document.querySelector("#highscore-btn").onclick = function () {
     homeContainer.classList.add("hidden");
     highscoreContainer.classList.remove("hidden");
+    console.log("sortedScores: " + highScores);
 }
 
 // Go Home Button click event on Leaderboard Screen
 document.querySelector("#goHome").onclick = function () {
     highscoreContainer.classList.add("hidden");
     homeContainer.classList.remove("hidden");
-    
+    clearHighscoresList();
 }
+
+document.querySelector("#highscore-btn").onclick = function (event) {
+    event.preventDefault();
+    homeContainer.classList.add("hidden");
+    highscoreContainer.classList.remove("hidden");
+    console.log(highScores);
+    displayHighscores()
+};
+
+// document.querySelector("#play-again").onclick = function () {
+//     secondsLeft = 60;
+//     questionIndex = 0;
+//     endContainer.classList.add("hidden");
+//     homeContainer.classList.add("hidden");
+//     gameContainer.classList.remove("hidden");
+//     showQuestion();
+//     setTime();
+//     progressText.textContent = (questionIndex + 1) + " of " + questions.length;
+// };
 
 //save button function
 document.querySelector("#saveScoreBtn").onclick = function (event){
@@ -148,28 +171,20 @@ document.querySelector("#saveScoreBtn").onclick = function (event){
       };
     localStorage.setItem("userScores", JSON.stringify(userScores));
     
-    
     highScores.push(userScores);
-    
-    if (localStorage.getItem("userScores")) {
-        var localData = [JSON.parse(localStorage.getItem("userScores"))];
-        console.log("inside Save Button")
-        console.log(localData);
-        localData.push(userScores);
-        console.log(localData);
-        localStorage.setItem("userScores", JSON.stringify(localData));
-    }
-
- 
-      
-    endContainer.classList.add("hidden");
-    highscoreContainer.classList.remove("hidden");
 };
 
 function displayHighscores() {
+    highScores.sort((function (a, b) {
+        return b.score - a.score;}))
     for (var e = 0; e < highScores.length; e++) {
         var li = document.createElement("li");
-        var scores = li.innerText = highScores[e].username + " " + highScores[e].score
+        li.className = "high-score";
+        li.innerText = highScores[e].username + " : " + highScores[e].score
         highscoresList.append(li);
     }
-};
+}
+
+function clearHighscoresList() {
+    document.getElementById("highscoresList").innerHTML = "";
+}
