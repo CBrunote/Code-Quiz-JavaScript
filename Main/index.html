@@ -10,9 +10,9 @@
     <!-- Main Container -->
     <div class="container">
       <!-- Section for the Starting Screen -->
-      <section id="home" class="flex-column flex-center hidden">
+      <section id="home" class="flex-column flex-center">
         <h1>Ready To Play CODE QUIZ?</h1>
-        <button class="btn">Play &#9654</button>
+        <button id="play" class="btn">Play &#9654</button>
         <button id="highscore-btn" class="btn">High Scores &#127942</button>
       </section>
       <!-- Section for the Quiz Itself -->
@@ -33,14 +33,14 @@
               0:00
             </h1>
           </div>
-          <div class="hud-item">
+          <!-- <div class="hud-item">
             <p class="hud-prefix">
               Score
             </p>
             <h1 class="hud-main-text"  id="score">
               0
             </h1>
-          </div>
+          </div> -->
         </header>
         <!-- Quiz Content -->
         <h2 id="question">What is the answer to this question?</h2>
@@ -65,16 +65,18 @@
           <h1 id="finalScore">0</h1>
           <form class="end-form-container">
             <h2 id="end-text">Enter your initials below to save your score!</h2>
-            <input type="text" name="name" id="username" placeholder="Enter your initials">
-            <button class="btn" id="saveScoreBtn" type="submit" onclick="saveHighScore(event)">Save 💾<button>
-            <button class="btn">Play Again &#9654</button>
-            <button class="btn">View Highscores &#127942</button>
+            <input type="text" name="name" id="username" placeholder="Enter your initials"></input>
+            <button class="btn" id="saveScoreBtn" type="submit">Save 💾</button>
+            <button id="play-again" class="btn">Play Again &#9654</button>
+            <button id="view-highscores" class="btn">View Highscores &#127942</button>
           </form>
       </section>
-      <section id="highScores" class="flex-center flex-column">
+      <section id="highScores" class="flex-center flex-column hidden">
         <h1 id="finalScore">Leaderboard</h1>
-        <ul id="highscoresList"></ul>
-        <button class="btn">Go Home &#127968</button>
+        <ul id="highscoresList">
+          
+        </ul>
+        <button id="goHome" class="btn">Go Home &#127968</button>
       </section>
     </div>
  <script src="./Assets/js/script.js">
