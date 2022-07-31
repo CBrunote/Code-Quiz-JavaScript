@@ -91,7 +91,15 @@ h2 {
     background: linear-gradient(90deg, rgb(206, 19, 19) 0%, rgb(201, 0, 19) 100%);
 }
 
+#view-highscores {
+    background: linear-gradient(90deg, rgb(206, 19, 19) 0%, rgb(201, 0, 19) 100%);
+}
+
 #highscore-btn:hover {
+    box-shadow: 0 0.4rem 1.4rem 0 rgba(201, 19, 19, 0.6);
+}
+
+#view-highscores:hover{
     box-shadow: 0 0.4rem 1.4rem 0 rgba(201, 19, 19, 0.6);
 }
 
@@ -188,13 +196,14 @@ input::placeholder {
 #highscoresList {
     list-style: none;
     margin-bottom: 4rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 4rem;
 }
 
 .high-score {
     font-size: 2.8rem;
     margin-bottom: 0.5rem;
     font-weight: bold;
+    text-align: center;
 }
 
 @media screen and (max-width: 768px) {

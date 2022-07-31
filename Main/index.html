@@ -33,14 +33,6 @@
               0:00
             </h1>
           </div>
-          <!-- <div class="hud-item">
-            <p class="hud-prefix">
-              Score
-            </p>
-            <h1 class="hud-main-text"  id="score">
-              0
-            </h1>
-          </div> -->
         </header>
         <!-- Quiz Content -->
         <h2 id="question">What is the answer to this question?</h2>
@@ -61,16 +53,18 @@
             <p id = "d" class="choice-text" data-number="4">Choice</p>
           </article>
       </section>
+      <!-- End Screen to Submit Scores -->
       <section id="end" class="flex-center flex-column hidden">
           <h1 id="finalScore">0</h1>
           <form class="end-form-container">
             <h2 id="end-text">Enter your initials below to save your score!</h2>
             <input type="text" name="name" id="username" placeholder="Enter your initials"></input>
             <button class="btn" id="saveScoreBtn" type="submit">Save 💾</button>
-            <button id="play-again" class="btn">Play Again &#9654</button>
+            <button id="playagain" class="btn">Play Again &#9654</button>
             <button id="view-highscores" class="btn">View Highscores &#127942</button>
           </form>
       </section>
+      <!-- Leaderboard Screen -->
       <section id="highScores" class="flex-center flex-column hidden">
         <h1 id="finalScore">Leaderboard</h1>
         <ul id="highscoresList"> 

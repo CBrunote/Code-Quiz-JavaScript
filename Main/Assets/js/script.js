@@ -16,17 +16,13 @@ var highscoresList = document.querySelector("#highscoresList");
 var secondsLeft = 60;
 var finalScore = document.querySelector("#finalScore");
 var timer;
-var highScores = [JSON.parse(localStorage.getItem("userScores"))]  || [];
-// .sort((function (a, b) {
-//     return b.score - a.score;}))
-// var sortedScores = highScores.sort((function (a, b) {
-//     return b.score - a.score;}));
+var highScores = [];
 
 
 var questionIndex = 0
 var questions = [
 {
-    question: "Commonly used data types DO NOT inlcude",
+    question: "Commonly used data types DO NOT include",
     choices: ["strings", "booleans", "alerts", "numbers"],
     answer: "alerts"
 },
@@ -125,13 +121,6 @@ document.querySelector("#view-highscores").onclick = function (event) {
     displayHighscores()
 };
 
-// Highscore button on Home Screen
-document.querySelector("#highscore-btn").onclick = function () {
-    homeContainer.classList.add("hidden");
-    highscoreContainer.classList.remove("hidden");
-    console.log("sortedScores: " + highScores);
-}
-
 // Go Home Button click event on Leaderboard Screen
 document.querySelector("#goHome").onclick = function () {
     highscoreContainer.classList.add("hidden");
@@ -147,16 +136,17 @@ document.querySelector("#highscore-btn").onclick = function (event) {
     displayHighscores()
 };
 
-// document.querySelector("#play-again").onclick = function () {
-//     secondsLeft = 60;
-//     questionIndex = 0;
-//     endContainer.classList.add("hidden");
-//     homeContainer.classList.add("hidden");
-//     gameContainer.classList.remove("hidden");
-//     showQuestion();
-//     setTime();
-//     progressText.textContent = (questionIndex + 1) + " of " + questions.length;
-// };
+document.querySelector("#playagain").onclick = function (event) {
+    event.preventDefault();
+    secondsLeft = 60;
+    questionIndex = 0;
+    endContainer.classList.add("hidden");
+    homeContainer.classList.add("hidden");
+    gameContainer.classList.remove("hidden");
+    showQuestion();
+    setTime();
+    progressText.textContent = (questionIndex + 1) + " of " + questions.length;
+};
 
 //save button function
 document.querySelector("#saveScoreBtn").onclick = function (event){
@@ -172,19 +162,36 @@ document.querySelector("#saveScoreBtn").onclick = function (event){
     localStorage.setItem("userScores", JSON.stringify(userScores));
     
     highScores.push(userScores);
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+
+    var endText = document.querySelector("#end-text");
+    endText.innerHTML = "SAVED!<br/><br/>Push View Highscores to see the Leaderboard";
 };
 
 function displayHighscores() {
-    highScores.sort((function (a, b) {
-        return b.score - a.score;}))
-    for (var e = 0; e < highScores.length; e++) {
-        var li = document.createElement("li");
-        li.className = "high-score";
-        li.innerText = highScores[e].username + " : " + highScores[e].score
-        highscoresList.append(li);
-    }
-}
+        console.log(localStorage.getItem("highScores"));
+        console.log(highScores);
+        if (JSON.parse(localStorage.getItem("highScores")) === null){
+            var li = document.createElement("li");
+            li.className = "high-score";
+            li.innerText = "No Highscores to Display"
+            highscoresList.append(li);
+        } else {
+            highScores = JSON.parse(localStorage.getItem("highScores"));
+            if (highScores.length >= 2) {
+                highScores.sort((function (a, b) {
+                return b.score - a.score;}))
+            }
+            for (var e = 0; e < highScores.length; e++) {
+                var li = document.createElement("li");
+                li.className = "high-score";
+                li.innerText = highScores[e].username + " : " + highScores[e].score
+                highscoresList.append(li);
+            }
+        }
+
+};
 
 function clearHighscoresList() {
     document.getElementById("highscoresList").innerHTML = "";
-}
+};
