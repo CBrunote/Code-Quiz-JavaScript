@@ -18,7 +18,7 @@ var finalScore = document.querySelector("#finalScore");
 var timer;
 var highScores = [];
 
-
+// question and answer bank
 var questionIndex = 0
 var questions = [
 {
@@ -57,9 +57,7 @@ function showQuestion() {
             if (questions[questionIndex].answer !== this.textContent){
                 (secondsLeft = secondsLeft - 15); 
             }
-
-            questionIndex ++;
-       
+        questionIndex ++; 
             if (questionIndex >= questions.length) {
                 endGame();
             } else if (secondsLeft <= 0) {
@@ -100,7 +98,7 @@ function endGame(){
     finalScore.textContent = localStorage.getItem("score")
 }
 
-// Click event to hide home screen and display quiz
+// Click event for play buttoon on home screen to hide home screen and display quiz
 document.querySelector("#play").onclick = function () {
     secondsLeft = 60;
     questionIndex = 0;
@@ -128,6 +126,7 @@ document.querySelector("#goHome").onclick = function () {
     clearHighscoresList();
 }
 
+// high scores button on home screen
 document.querySelector("#highscore-btn").onclick = function (event) {
     event.preventDefault();
     homeContainer.classList.add("hidden");
@@ -136,6 +135,7 @@ document.querySelector("#highscore-btn").onclick = function (event) {
     displayHighscores()
 };
 
+// Play again button on the end screen
 document.querySelector("#playagain").onclick = function (event) {
     event.preventDefault();
     secondsLeft = 60;
@@ -148,7 +148,7 @@ document.querySelector("#playagain").onclick = function (event) {
     progressText.textContent = (questionIndex + 1) + " of " + questions.length;
 };
 
-//save button function
+// Save button function. Saves the uusername and score to local storage and applies to the highscores array. Also adds text to confirm the score was saved.
 document.querySelector("#saveScoreBtn").onclick = function (event){
     event.preventDefault()
     var userName = document.getElementById("username").value;
@@ -168,6 +168,7 @@ document.querySelector("#saveScoreBtn").onclick = function (event){
     endText.innerHTML = "SAVED!<br/><br/>Push View Highscores to see the Leaderboard";
 };
 
+//function to get highscores from local storage and add high scores as list items to the unordered list
 function displayHighscores() {
         console.log(localStorage.getItem("highScores"));
         console.log(highScores);
@@ -192,6 +193,7 @@ function displayHighscores() {
 
 };
 
+//function to clear highscore list items so the clean highscores list is displayed every time the displayhighscores function runs
 function clearHighscoresList() {
     document.getElementById("highscoresList").innerHTML = "";
 };

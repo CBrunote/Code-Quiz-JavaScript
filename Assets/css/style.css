@@ -1,14 +1,19 @@
 :root {
-    background-color: rgb(29,26,26);
+    --background: rgb(29,26,26);
+    --purpleGradient: linear-gradient(90deg, rgb(141, 18, 255) 0%, rgb(132, 0, 255) 100%);
+    --redGradient: linear-gradient(90deg, rgb(206, 19, 19) 0%, rgb(201, 0, 19) 100%);
+    --purpleShadow:  rgba(141, 18, 255, 0.6);
+    --redShadow: rgba(201, 19, 19, 0.6);
+    --lightPurple: rgb(189, 119, 255);
+    background-color: var(--background);
 }
 
 * {
-    /* border: 2px red dotted; */
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-size: 62.5%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 
 body{
@@ -68,15 +73,15 @@ h2 {
     margin-bottom: 1rem;
     text-decoration: none;
     font-weight: bold;
-    color: rgb(28, 26, 26);
-    background: linear-gradient(90deg, rgb(141, 18, 255) 0%, rgb(132, 0, 255) 100%);
+    color: var(--background);
+    background: var(--purpleGradient);
     border-radius: 4px;
     border-style: none;
 }
 
 .btn:hover {
     cursor: pointer;
-    box-shadow: 0 0.4rem 1.4rem 0 rgba(141, 18, 255, 0.6);
+    box-shadow: 0 0.4rem 1.4rem 0 var(--purpleShadow);
     transition: transform 150ms;
     transform: scale(1.03);
 }
@@ -88,19 +93,19 @@ h2 {
 }
 
 #highscore-btn {
-    background: linear-gradient(90deg, rgb(206, 19, 19) 0%, rgb(201, 0, 19) 100%);
+    background: var(--redGradient);
 }
 
 #view-highscores {
-    background: linear-gradient(90deg, rgb(206, 19, 19) 0%, rgb(201, 0, 19) 100%);
+    background: var(--redGradient);
 }
 
 #highscore-btn:hover {
-    box-shadow: 0 0.4rem 1.4rem 0 rgba(201, 19, 19, 0.6);
+    box-shadow: 0 0.4rem 1.4rem 0 var(--redShadow);
 }
 
 #view-highscores:hover{
-    box-shadow: 0 0.4rem 1.4rem 0 rgba(201, 19, 19, 0.6);
+    box-shadow: 0 0.4rem 1.4rem 0 var(--redShadow);
 }
 
 .choice-container {
@@ -108,17 +113,17 @@ h2 {
     margin-bottom: 0.8rem;
     width: 100%;
     border-radius: 4px;
-    background:rgb(141, 18, 255);
+    background: var(--purpleGradient);
     font-size: 3rem;
     min-width: 80rem;
 }
 
 .choice-container:hover {
     cursor:pointer;
-    background: rgb(189, 119, 255);
-    box-shadow: 0 0.4rem 1.4rem 0 rgba(141, 18, 255, 0.6);
+    background: var(--lightPurple);
+    box-shadow: 0 0.4rem 1.4rem 0 var(--purpleShadow);
     transform: scale(1.02);
-    transform: transform 100ms; 
+    transform: 100ms; 
 }
 
 .choice-letter {
@@ -130,14 +135,6 @@ h2 {
 .choice-text {
     padding: 2rem;
     width: 100%;
-}
-
-.correct {
-    background: green;
-}
-
-.incorrect {
-    background: red;
 }
 
 #hud {
@@ -155,7 +152,7 @@ h2 {
     text-align: center;
 }
 
-/* end scren CSS */
+/* end screen CSS */
 .end-form-container {
     width: 100%;
     display: flex;
@@ -170,7 +167,7 @@ input{
     padding: 1.5rem;
     font-size: 1.8rem;
     border: none;
-    box-shadow: 0 0.1rem 1.4rem 0 rgba(141, 18, 255, 0.6); ;
+    box-shadow: 0 0.1rem 1.4rem 0 var(--purpleShadow);
 }
 
 input::placeholder {
@@ -209,5 +206,18 @@ input::placeholder {
 @media screen and (max-width: 768px) {
     .container .choice-container{
         min-width: 40rem;
+    }
+}
+
+
+@media screen and (max-width: 450px) {
+    .container .choice-container{
+        min-width: 10rem;
+    }
+    .hud-main-text {
+        font-size: 3.5rem;
+    }
+    #question{
+        font-size: 3rem;
     }
 }
